@@ -12,7 +12,7 @@ import router from './router'
 Vue.config.productionTip = false
 
 const http = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: process.env.VUE_APP_API_URL,
 })
 
 Vue.prototype.$httpajax = http

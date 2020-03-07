@@ -14,12 +14,23 @@ const models = TypegooseModule.forFeature([
 @Global()
 @Module({
   imports: [
-    TypegooseModule.forRoot('mongodb://localhost/fullstackstudy', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
+    TypegooseModule.forRootAsync({
+      useFactory(){
+        return {
+          uri: process.env.DB,
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+          useCreateIndex: true,
+          useFindAndModify: false,
+        };
+      },
     }),
+    // TypegooseModule.forRoot(process.env.DB, {
+    //   useNewUrlParser: true,
+    //   useUnifiedTopology: true,
+    //   useCreateIndex: true,
+    //   useFindAndModify: false,
+    // }),
     models
   ],
   providers: [DbService],
